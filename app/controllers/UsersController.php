@@ -7,9 +7,11 @@ class UsersController extends BaseController {
 	 *
 	 * @return Response
 	 */
-	public function index()
+
+	protected $restful = true;
+	public function get($user)
 	{
-        return View::make('users.index');
+        return View::make('users.show');
 	}
 
 	/**
@@ -17,7 +19,7 @@ class UsersController extends BaseController {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function getSignup()
 	{
         return View::make('users.create');
 	}
@@ -27,29 +29,20 @@ class UsersController extends BaseController {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function postStore()
 	{
 		//
 	}
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-        return View::make('users.show');
-	}
+	
 
 	/**
 	 * Show the form for editing the specified resource.
 	 *
-	 * @param  int  $id
+	 * @param  int  $user
 	 * @return Response
 	 */
-	public function edit($id)
+	public function getEdit($user)
 	{
         return View::make('users.edit');
 	}
@@ -57,10 +50,10 @@ class UsersController extends BaseController {
 	/**
 	 * Update the specified resource in storage.
 	 *
-	 * @param  int  $id
+	 * @param  int  $user
 	 * @return Response
 	 */
-	public function update($id)
+	public function postUpdate($user)
 	{
 		//
 	}
@@ -68,10 +61,15 @@ class UsersController extends BaseController {
 	/**
 	 * Remove the specified resource from storage.
 	 *
-	 * @param  int  $id
+	 * @param  int  $user
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function getDestroy($user)
+	{
+		//
+	}
+
+	public function postDestroyconfirm($user)
 	{
 		//
 	}

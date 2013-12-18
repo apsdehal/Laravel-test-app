@@ -1,5 +1,12 @@
 @extends('master')
 
+
+@if(Auth::check())
+
+@include('loggedIn.loggedIn')
+
+@else
+
 @section('title')
 {{ 'Hello' }}
 @stop
@@ -8,4 +15,8 @@
 
 {{'Welcome'}}
 
+{{ HTML::link('/login','Login') }}
+
 @stop
+
+@endif

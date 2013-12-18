@@ -11,8 +11,10 @@
 |
 */
 
-Route::get('/login','LogController@showLogin');
+Route::get('/logout','IndexController@LogOut');
 
-Route::controller('/','IndexController');
+Route::get('/','IndexController@showIndex');
 
-Route::resource('users', 'UsersController');
+Route::controller('','LogController');
+
+Route::controller('{user}','UsersController');

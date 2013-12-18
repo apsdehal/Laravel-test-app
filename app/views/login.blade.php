@@ -6,7 +6,7 @@
 
 @section('content')
 {{ Form::open(array(
-	'url' => '/',
+	'url' => '/login',
 	'method' => 'post'
 )) }}
 

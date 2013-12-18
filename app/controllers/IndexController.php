@@ -1,25 +1,18 @@
 <?php
 
 class IndexController extends BaseController{
-	public function get(){
+	public function showIndex(){
 		return View::make('home');
 	}
-	public function post(){
-		$username = Input::get('username');
-		$password = Input::get('password');
 
-		if(Auth::attempt(array(
-			'username' => $username, 
-			'password' => $password))){
+	public function LogOut(){
+		
+		if(Auth::check()){
+			User::LogOut();
+		}	
 
-			return 'Logged in';
-
-
-		} else {
-
-			Redirect::to('/login')->withInput();
-
-		}
+		return Redirect::to('/');
+		 
 	}
-
+	
 }

@@ -2,7 +2,7 @@
 
 class LogController extends BaseController{
 
-	public function showLogin(){
+	public function getLogin(){
 
 		$passedValue = null;
 
@@ -14,6 +14,23 @@ class LogController extends BaseController{
 		}
 
 		return View::make('login')->with('value', $passedValue);
+	
 	}
 
+	public function postLogin(){
+		$username = Input::get('username');
+		$password = Input::get('password');
+
+		if( Auth::attempt(array(
+			'username' => $username, 
+			'password' => $password ))){
+
+			return Redirect::to('/');
+
+		} else {
+
+			return Redirect::to('/login')->withInput();
+
+		}
+	}
 }
