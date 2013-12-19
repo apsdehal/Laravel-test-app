@@ -3,6 +3,10 @@
 class General extends Eloquent {
 	protected $guarded = array();
 
+	public $errors;
+
+	public $input;
+
 	protected static $messages = array(
 			'full_name' 	=> 'Full Name',
 			'email'			=> 'Email',
@@ -27,7 +31,7 @@ class General extends Eloquent {
 	public static function getMessage($attr){
 
 		return static::$messages[$attr];
-	
+
 	}
 
 	public static function getLi($key, $attr){
@@ -38,31 +42,44 @@ class General extends Eloquent {
 	}
 
 	public static function getStringForMany($attrs){
+		if($attrs == null)
+
+			return null;
+
 		$string ='<ul>';
 
 		foreach($attrs as $attr){
 			foreach($attr as $key=>$status){
-			
+
 		 	$string	.= self::getLi($key,$status);
-		
+
 		 	}
-		 }	
+		 }
 		 $string .= '</ul>';
 
 		 return $string;
-	}	
+	}
 
 	public static function getStringForOne($attrs){
+		if($attrs == null)
+
+			return null;
+
 		$string ='<ul>';
 
 		foreach($attrs as $key=>$attr ){
-			
+
 		 	$string	.= self::getLi($key,$attr);
-		
+
 		 }
 
 		 $string .= '</ul>';
 
 		 return $string;
 	}
+	public function checkError($attr){
+
+
+	}
+
 }

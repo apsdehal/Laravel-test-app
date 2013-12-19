@@ -13,5 +13,5 @@ class Info extends Eloquent {
 
 	}
 
-	
+
 }

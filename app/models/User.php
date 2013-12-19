@@ -5,6 +5,9 @@ use Illuminate\Auth\Reminders\RemindableInterface;
 
 class User extends Eloquent implements UserInterface, RemindableInterface {
 
+
+	protected $guarded = array('user_id');
+
 	/**
 	 * The database table used by the model.
 	 *
@@ -57,7 +60,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 		$user = Auth::getUser();
 
-		$user->password = null;
+		//$user->password = null;
 
 		return $user;
 	}
@@ -96,54 +99,81 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 		$attr = array('full_name','email','phone_no','address_line1','address_line2','website');
 
-		$info = $this->info()->get($attr);
 
-		return json_decode($info[0]);
-	}
+		$infoObject = $this->info();
+
+		return self::getRelData($infoObject,$attr,0);
+
+		}
 
 	public function getRef(){
 
 		$attr = array('refs');
 
-		$refs = $this->ref()->get($attr);
+		$refObject = $this->ref();
 
-		return json_decode($refs[0]);
-	}
-	
+		return self::getRelData($refObject,$attr, 0);
+
+		}
+
 	public function getWork(){
 
 		$attr = array('job_title','company','start_date','end_date','other_info');
 
-		$work = $this->work()->get($attr);
+		$workObject = $this->work();
 
-		return json_decode($work);
-	}
+		return self::getRelData($workObject,$attr,1);
+
+		}
 
 	public function getEdu(){
 
 		$attr = array('course_name','institution','start_date','end_date');
 
-		$edu = $this->edu()->get($attr);
+		$eduObject = $this->edu();
 
-		return json_decode($edu);
-	}
+		return self::getRelData($eduObject,$attr, 1);
+		}
 
 	public function getInterest(){
 
 		$attr = array('interests');
 
-		$interests = $this->interest()->get($attr);
+		$interestObject = $this->interest();
 
-		return json_decode($interests[0]);
-	}
+		return self::getRelData($interestObject,$attr, 0);
+
+		}
 
 	public function getOther(){
 
 		$attr = array('info');
 
-		$others = $this->other()->get($attr);
+		$otherObject = $this->other();
 
-		return json_decode($others);
+		return self::getRelData($otherObject,$attr,1);
+
+		}
+
+	public static function getRelData($object, $attr, $par){
+		$count = $object->count();
+
+		if($count){
+
+			$data = $object->get($attr);
+
+			return ($par==0)?json_decode($data[0]):json_decode($data);
+
+		} else
+
+			return null;
+	}
+
+	public static function createUser($info){
+		$info['password'] = Hash::make($info['password']);
+		$user = new self($info);
+		$user->save();
+		return $user;
 	}
 
 }
