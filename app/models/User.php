@@ -6,7 +6,7 @@ use Illuminate\Auth\Reminders\RemindableInterface;
 class User extends Eloquent implements UserInterface, RemindableInterface {
 
 
-	protected $guarded = array('user_id');
+	protected $guarded = array();
 
 	/**
 	 * The database table used by the model.
@@ -58,7 +58,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	public static function currentLoggedIn(){
 
-		$user = Auth::getUser();
+		$user = Auth::user();
 
 		//$user->password = null;
 

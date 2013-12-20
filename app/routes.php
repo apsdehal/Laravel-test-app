@@ -13,8 +13,15 @@
 
 Route::get('/logout','IndexController@LogOut');
 
+Route::get('{user}/edit',array(
+	'as' => 'userEdit',
+	'uses' => 'UsersController@getEdit'));
+
+Route::post('{user}/update',array(
+	'as' => 'userUpdate',
+	'uses' => 'UsersController@postUpdate'));
+
 Route::get('/','IndexController@showIndex');
 
 Route::controller('','LogController');
 
-Route::controller('{user}','UsersController');

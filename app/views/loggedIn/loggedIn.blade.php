@@ -16,6 +16,8 @@ Hi!
 
 {{ HTML::link('/'.$user->username, 'Profile') }}
 
+{{ HTML::link('/'.$user->username.'/edit', 'Edit')}}
+
 {{ HTML::link("/logout","LogOut") }}
 
 @stop

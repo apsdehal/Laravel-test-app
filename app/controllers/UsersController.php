@@ -31,9 +31,53 @@ class UsersController extends BaseController {
 	 * @param  int  $user
 	 * @return Response
 	 */
-	public function postUpdate($user)
+	public function postUpdate()
 	{
-		//
+		$input = Input::all();
+		$info = $input['info'];
+		$work = $input['work'];
+		$edu  = $input['edu'];
+		$interest = $input['interests'];
+		$ref = $input['refs'];
+		$other = $input['other'];
+		$user = User::currentLoggedIn();
+
+		$infoData = $user->info;
+		$workData = $user->work;
+		$eduData = $user->edu;
+		$interestData = $user->interest;
+		$refData = $user->ref;
+		$otherData = $user->other;
+
+		$infoObject = $user->info();
+		$workObject = $user->work();
+		$eduObject = $user->edu();
+		$interestObject = $user->interest();
+		$refObject = $user->ref();
+		$otherObject = $user->other();
+
+
+		if(count($infoData)){
+			$infoObject->update($info);
+		} else {
+			$newInfoRow = new Info($info);
+			$infoObject->save($newInfoRow);
+		}
+
+		if(count($interestData)){
+			$interestObject->update($interest);
+		} else {
+			$newInterestRow = new Interest($interest);
+			$interestObject->save($newInterestRow);
+		}
+
+		if(count($refData)){
+			$refObject->update($ref);
+		} else {
+			$newRefRow = new Ref($ref);
+			$refObject->save($newRefRow);
+		}
+
 	}
 
 	/**
