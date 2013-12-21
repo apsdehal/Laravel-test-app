@@ -1,7 +1,9 @@
 <?php
 
 class Ref extends Eloquent {
-	protected $guarded = array();
+	protected $hidden = array('user_id');
+
+	protected $guarded = array('user_id','ref_id');
 
 	public static $rules = array();
 

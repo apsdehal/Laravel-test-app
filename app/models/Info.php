@@ -1,7 +1,9 @@
 <?php
 
 class Info extends Eloquent {
-	protected $guarded = array();
+	protected $hidden = array('user_id');
+
+	protected $guarded = array('user_id','info_id');
 
 	protected $table = 'infos';
 

@@ -1,7 +1,9 @@
 <?php
 
 class Interest extends Eloquent {
-	protected $guarded = array();
+	protected $hidden = array('user_id');
+
+	protected $guarded = array('user_id','work_id');
 
 	public static $rules = array();
 

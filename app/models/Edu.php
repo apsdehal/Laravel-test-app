@@ -1,7 +1,9 @@
 <?php
 
 class Edu extends Eloquent {
-	protected $guarded = array('user_id');
+	protected $hidden = array('user_id');
+
+	protected $guarded = array('user_id','edu_id');
 
 	public static $rules = array();
 

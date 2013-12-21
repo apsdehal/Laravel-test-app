@@ -1,7 +1,9 @@
 <?php
 
 class Other extends Eloquent {
-	protected $guarded = array();
+	protected $hidden = array('user_id');
+
+	protected $guarded = array('user_id','other_id');
 
 	public static $rules = array();
 

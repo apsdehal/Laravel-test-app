@@ -1,5 +1,7 @@
 @extends('master')
 
+
+{{ $info }}
 @section('title')
 
 Edit profile
@@ -49,53 +51,121 @@ Edit profile
 {{ '<br/>' }}
 
 <div id="work">
+<?php $i =0; ?>
 
-{{Form::label('work[][job_title]', 'Job Title')}}
-{{Form::text('work[][job_title]') }}
 
-{{Form::label('work[][company]', 'Company')}}
-{{Form::text('work[][company]') }}
+@if(count($work) != 0)
 
-{{ '<br/>' }}
 
-{{Form::label('work[][start_date]', 'Start Date')}}
-{{Form::text('work[][start_date]') }}
+@foreach($work as $w)
+{{Form::label('work['.$i.'job_title]', 'Job Title')}}
+{{Form::text('work['.$i.'][job_title]') }}
 
-{{Form::label('work[][end_date]', 'End Date')}}
-{{Form::text('work[][end_date]') }}
+{{Form::label('work['.$i.'][company]', 'Company')}}
+{{Form::text('work['.$i.'][company]') }}
 
 {{ '<br/>' }}
 
-{{Form::label('work[][other_info]', 'Other Info')}}
-{{Form::textarea('work[][other_info]') }}
+{{Form::label('work['.$i'][start_date]', 'Start Date')}}
+{{Form::text('work['.$i.'][start_date]') }}
+
+{{Form::label('work['.$i.'][end_date]', 'End Date')}}
+{{Form::text('work['.$i.'][end_date]') }}
+
+{{ '<br/>' }}
+
+{{Form::label('work['.$i.'][other_info]', 'Other Info')}}
+{{Form::textarea('work['.$i.'][other_info]') }}
+
+{{Form::hidden('work['.$i.'][work_id]',$w->work_id)}}
+<?php $i++; ?>
+
+@endforeach
+{{ Form::submit('Save')}}
+
+@else
+
+{{Form::label('work['.$i.'][job_title]', 'Job Title')}}
+{{Form::text('work['.$i.'][job_title]') }}
+
+{{Form::label('work['.$i.'][company]', 'Company')}}
+{{Form::text('work['.$i.'][company]') }}
+
+{{ '<br/>' }}
+
+{{Form::label('work['.$i.'][start_date]', 'Start Date')}}
+{{Form::text('work['.$i.'][start_date]') }}
+
+{{Form::label('work['.$i.'][end_date]', 'End Date')}}
+{{Form::text('work['.$i.'][end_date]') }}
+
+{{ '<br/>' }}
+
+{{Form::label('work['.$i.'][other_info]', 'Other Info')}}
+{{Form::textarea('work['.$i.'][other_info]') }}
 
 {{ Form::submit('Save')}}
+<?php $i++; ?>
+@endif
 </div>
 
 {{ '<br/>' }}
 
 <div id="edu">
+<?php $j =0 ?>
+@if( count($edu) != 0)
 
-{{Form::label('edu[][course_name]', 'Course Name')}}
-{{Form::text('edu[][course_name]') }}
+@foreach($edu as $e)
+{{Form::label('edu['.$j.'][course_name]', 'Course Name')}}
+{{Form::text('edu['.$j.'][course_name]') }}
 
-{{Form::label('edu[][institution]', 'Institution Name')}}
-{{Form::text('edu[][institution]') }}
-
-{{ '<br/>' }}
-
-{{Form::label('edu[][start_date]', 'Start Date')}}
-{{Form::text('edu[][start_date]') }}
-
-{{Form::label('edu[][end_date]', 'End Date')}}
-{{Form::text('edu[][end_date]') }}
+{{Form::label('edu['.$j.'][institution]', 'Institution Name')}}
+{{Form::text('edu['.$j.'][institution]') }}
 
 {{ '<br/>' }}
 
-{{Form::label('edu[][other_info]', 'Other Info')}}
-{{Form::textarea('edu[][other_info]') }}
+{{Form::label('edu['.$j.'][start_date]', 'Start Date')}}
+{{Form::text('edu['.$j.'][start_date]') }}
+
+{{Form::label('edu['.$j.'][end_date]', 'End Date')}}
+{{Form::text('edu['.$j.'][end_date]') }}
+
+{{ '<br/>' }}
+
+{{Form::label('edu['.$j.'][other_info]', 'Other Info')}}
+{{Form::textarea('edu['.$j.'][other_info]') }}
+
+{{Form::hidden('edu[][edu_id]',$e->edu_id)}}
+
+<?php $j++; ?>
+@endforeach
 
 {{ Form::submit('Save')}}
+
+@else
+
+{{Form::label('edu['.$j.'][course_name]', 'Course Name')}}
+{{Form::text('edu[][course_name]') }}
+
+{{Form::label('edu['.$j.'][institution]', 'Institution Name')}}
+{{Form::text('edu['.$j.'][institution]') }}
+
+{{ '<br/>' }}
+
+{{Form::label('edu['.$j.'][start_date]', 'Start Date')}}
+{{Form::text('edu['.$j.'][start_date]') }}
+
+{{Form::label('edu['.$j.'][end_date]', 'End Date')}}
+{{Form::text('edu['.$j.'][end_date]') }}
+
+{{ '<br/>' }}
+
+{{Form::label('edu['.$j.'][other_info]', 'Other Info')}}
+{{Form::textarea('edu['.$j.'][other_info]') }}
+
+{{Form::submit('Save')}}
+
+@endif
 </div>
 
 {{ '<br/>' }}
@@ -119,12 +189,33 @@ Edit profile
 </div>
 
 {{ '<br/>' }}
+<?php $k=0; ?>
+@if( count($other) != 0)
+<div id="other">
+
+
+@foreach($other as $o)
+{{Form::label('other['.$k.'][info]', 'Other')}}
+{{Form::textarea('other['.$k.'][info]') }}
+
+{{Form::hidden('other['.$k.'][other_id]',$o->other_id)}}
+<?php $k++ ?>
+{{ Form::submit('Save')}}
+
+@endforeach
+</div>
+
+@else
 
 <div id="other">
 
-{{Form::label('other[][info]', 'Other')}}
-{{Form::textarea('other[][info]') }}
+{{Form::label('other['.$k.'][info]', 'Other')}}
+{{Form::textarea('other['.$k.'][info]') }}
 
 {{ Form::submit('Save')}}
+
+<?php $k++; ?>
 </div>
+
+@endif
 @stop
