@@ -66,7 +66,7 @@ Edit profile
 
 {{ '<br/>' }}
 
-{{Form::label('work['.$i'][start_date]', 'Start Date')}}
+{{Form::label('work['.$i.'][start_date]', 'Start Date')}}
 {{Form::text('work['.$i.'][start_date]') }}
 
 {{Form::label('work['.$i.'][end_date]', 'End Date')}}

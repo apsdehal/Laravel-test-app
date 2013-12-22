@@ -14,4 +14,15 @@ class Ref extends Eloquent {
 		return General::getStringForOne($refs);
 
 	}
+
+	public static function updateRef( $ref, $refData, $refObject ){
+		if(!empty($ref['refs'])){
+			if(count($refData)){
+				$refObject->update($ref);
+			} else {
+				$newRefRow = new Ref($ref);
+				$refObject->save($newRefRow);
+			}
+		}
+	}
 }

@@ -12,6 +12,12 @@ Hi!
 
 {{ Work::showWork($user) }}
 
+{{ Edu::showEdu($user) }}
+
+{{ Ref::showRef($user) }}
+
+{{Interest::showInterest($user) }}
+
 {{ 'Hello'.' '. $user->first_name }}
 
 {{ HTML::link('/'.$user->username, 'Profile') }}

@@ -48,71 +48,21 @@ class UsersController extends BaseController {
 	 */
 	public function postUpdate()
 	{
-		$input = Input::all();
-		$info = $input['info'];
-		$work = $input['work'];
-		$edu  = $input['edu'];
-		$interest = $input['interests'];
-		$ref = $input['refs'];
-		$other = $input['other'];
 		$user = User::currentLoggedIn();
 
+		$input = Input::all();
 
-		$infoData = $user->info;
-		$workData = $user->work;
-		$eduData = $user->edu;
-		$interestData = $user->interest;
-		$refData = $user->ref;
-		$otherData = $user->other;
+		Info::updateInfo($input['info'], $user->info, $user->info());
 
-		$infoObject = $user->info();
-		$workObject = $user->work();
-		$eduObject = $user->edu();
-		$interestObject = $user->interest();
-		$refObject = $user->ref();
-		$otherObject = $user->other();
+		Interest::updateInterest($input['interests'], $user->interest, $user->interest());
 
-		if(!empty($info['username'])){
-				if(count($infoData)){
-				$infoObject->update($info);
-			} else {
-				$newInfoRow = new Info($info);
-				$infoObject->save($newInfoRow);
-			}
-		} else echo 'info';
+		Ref::updateRef($input['refs'], $user->ref, $user->ref());
 
-		if(!empty($interest['interests'])){
-			if(count($interestData)){
-				$interestObject->update($interest);
-			} else {
-				$newInterestRow = new Interest($interest);
-				$interestObject->save($newInterestRow);
-			}
-		} else echo 'Interest';
+		Work::updateWork($input['work'], $user);
 
-		if(!empty($ref['refs'])){
-			if(count($refData)){
-				$refObject->update($ref);
-			} else {
-				$newRefRow = new Ref($ref);
-				$refObject->save($newRefRow);
-			}
-		} else echo 'ref';
+		Edu::updateEdu($input['edu'], $user);
 
-		if(!empty($work[0]['job_title'])){
-			var_dump($work[6]);
-			foreach($work as $w){
-				//var_dump($w);
-				//echo '<br/>';
-				// if($w['work_id']) {
-				// 	$orgWork = $workObject->where('work_id','=',$w['work_id']);
-				// 	var_dump($orgWork);//$orgWork->update($w);
-				// } else {
-				// 	//$newWorkRow = new Work($work);
-				// 	//$workObject->save($newRefRow);
-				// }
-			}
-		}
+		Other::updateOther($input['other'], $user);
 	}
 
 	/**

@@ -13,4 +13,17 @@ class Edu extends Eloquent {
 
 		return General::getStringForMany($edus);
 	}
+	public static function updateEdu($edu, $user){
+		if(!empty($edu[0]['course_name'])){
+			foreach($edu as $w){
+				if($w['edu_id']) {
+					$orgEdu = $user->edu()->where('edu_id','=',$w['edu_id']);
+					$orgEdu->update($w);
+				} else {
+					$newEduRow = new Edu($edu);
+					$user->edu()->save($newEduRow);
+				}
+			}
+		}
+	}
 }

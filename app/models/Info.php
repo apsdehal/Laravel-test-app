@@ -17,5 +17,16 @@ class Info extends Eloquent {
 
 	}
 
+	public static function updateInfo($info, $infoData, $infoObject){
+		if(!empty($info['username'])){
+				if(count($infoData)){
+				$infoObject->update($info);
+			} else {
+				$newInfoRow = new Info($info);
+				$infoObject->save($newInfoRow);
+			}
+		}
+	}
+
 
 }

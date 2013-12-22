@@ -17,7 +17,7 @@ class General extends Eloquent {
 			'refs'			=> 'References',
 			'job_title'		=> 'Job Title',
 			'start_date'	=> 'Start Date',
-			'end_Date'		=> 'End Date',
+			'end_date'		=> 'End Date',
 			'company'		=> 'Company Name',
 			'interests'		=> 'Interests',
 			'course_name'	=> 'Course Name',
